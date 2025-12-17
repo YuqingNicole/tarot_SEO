@@ -51,29 +51,29 @@ export default function TarotLibrary() {
                     <button
                         onClick={() => setSelectedFilter("all")}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedFilter === "all"
-                                ? "bg-purple-600 text-white"
-                                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                            ? "bg-purple-600 text-white"
+                            : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                             }`}
                     >
                         <Filter className="inline w-4 h-4 mr-1" />
-                        All Cards
+                        All
                     </button>
                     <button
                         onClick={() => setSelectedFilter("major")}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedFilter === "major"
-                                ? "bg-purple-600 text-white"
-                                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                            ? "bg-purple-600 text-white"
+                            : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                             }`}
                     >
-                        🌟 Major Arcana
+                        Major Arcana
                     </button>
                     {Object.entries(SUIT_INFO).map(([suit, info]) => (
                         <button
                             key={suit}
                             onClick={() => setSelectedFilter(suit as Suit)}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedFilter === suit
-                                    ? "bg-purple-600 text-white"
-                                    : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                ? "bg-purple-600 text-white"
+                                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                                 }`}
                         >
                             {info.symbol} {suit.charAt(0).toUpperCase() + suit.slice(1)}
@@ -92,7 +92,7 @@ export default function TarotLibrary() {
                 {filteredCards.map((card) => (
                     <Link
                         key={card.id}
-                        href={`/tarot-card-meanings/${card.slug}`}
+                        href={`/library/${card.slug}`}
                         className="block aspect-[2/3] hover:scale-105 transition-transform"
                     >
                         <Card card={card} interactive={false} />

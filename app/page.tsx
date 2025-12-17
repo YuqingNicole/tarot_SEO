@@ -48,7 +48,7 @@ export default function HomePage() {
 
             <section className="text-center">
                 <Link
-                    href="/tarot-card-meanings"
+                    href="/library"
                     className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
                     Explore All 78 Tarot Cards →

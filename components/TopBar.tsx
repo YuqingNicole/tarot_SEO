@@ -10,7 +10,6 @@ export default function TopBar() {
     const navItems = [
         { href: "/", label: "Home" },
         { href: "/library", label: "Library" },
-        { href: "/tarot-card-meanings", label: "All Cards" },
     ];
 
     return (

@@ -1,5 +1,5 @@
-import TarotLibrary from "@/components/TarotLibrary";
 import { Metadata } from "next";
+import TarotLibrary from "@/components/TarotLibrary";
 
 export const metadata: Metadata = {
     title: "Tarot Card Library - All 78 Cards",

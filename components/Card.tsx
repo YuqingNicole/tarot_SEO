@@ -65,10 +65,16 @@ export default function Card({
         >
             {/* Card Back */}
             <div className="absolute inset-0 backface-hidden rounded-lg overflow-hidden shadow-xl">
-                <div className="w-full h-full bg-gradient-to-br from-purple-900 via-purple-700 to-pink-600 flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-purple-900 via-purple-700 to-pink-600 flex flex-col items-center justify-center p-4">
+                    <div className="text-6xl mb-4">🔮</div>
                     <div className="text-center text-white">
-                        <div className="text-6xl mb-4">🔮</div>
-                        <div className="text-sm font-serif">TAROT</div>
+                        <div className="text-base font-bold mb-1">{card.name}</div>
+                        {card.arcana === "major" && (
+                            <div className="text-xs opacity-80">Major Arcana</div>
+                        )}
+                        {card.arcana === "minor" && card.suit && (
+                            <div className="text-xs opacity-80 capitalize">{card.suit}</div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -81,9 +87,9 @@ export default function Card({
                         <div className="text-6xl">🎴</div>
                     </div>
 
-                    {/* Card Name */}
+                    {/* Card Name - Always Visible */}
                     <div className="text-center">
-                        <h3 className="font-bold text-sm mb-1">{card.name}</h3>
+                        <h3 className="font-bold text-base mb-1 line-clamp-2">{card.name}</h3>
                         {card.isReversed && (
                             <span className="text-xs text-red-600 dark:text-red-400">
                                 (Reversed)
