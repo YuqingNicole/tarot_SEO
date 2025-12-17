@@ -30,6 +30,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
+import * as fs from "fs";
+import * as path from "path";
+import { SEOCardData } from "@/lib/types";
+
+// ... existing imports ...
+
+// Helper to get static data
+function getStaticSEOData(slug: string): SEOCardData | null {
+    try {
+        const filePath = path.join(process.cwd(), "data", "card-seo-data.json");
+        if (!fs.existsSync(filePath)) return null;
+
+        const fileContent = fs.readFileSync(filePath, "utf-8");
+        const data = JSON.parse(fileContent);
+        return data[slug] || null;
+    } catch (error) {
+        console.error("Error reading static SEO data:", error);
+        return null;
+    }
+}
+
 export default async function TarotCardPage({ params }: Props) {
     const { slug } = await params;
     const card = getCardBySlug(slug);
@@ -38,5 +59,7 @@ export default async function TarotCardPage({ params }: Props) {
         notFound();
     }
 
-    return <CardDetailPage card={card} />;
+    const initialSeoData = getStaticSEOData(slug);
+
+    return <CardDetailPage card={card} initialSeoData={initialSeoData} />;
 }

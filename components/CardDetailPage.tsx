@@ -7,13 +7,15 @@ import { getCardSEOData } from "@/services/geminiService";
 import Card from "./Card";
 import { ArrowLeft, Loader2 } from "lucide-react";
 
+
 interface CardDetailPageProps {
     card: TarotCard;
+    initialSeoData?: SEOCardData | null;
 }
 
-export default function CardDetailPage({ card }: CardDetailPageProps) {
-    const [seoData, setSeoData] = useState<SEOCardData | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+export default function CardDetailPage({ card, initialSeoData = null }: CardDetailPageProps) {
+    const [seoData, setSeoData] = useState<SEOCardData | null>(initialSeoData);
+    const [isLoading, setIsLoading] = useState(!initialSeoData);
     const panelClass =
         "rounded-2xl border border-purple-100/60 dark:border-purple-800/40 bg-white/80 dark:bg-slate-900/75 backdrop-blur-sm shadow-lg shadow-purple-200/40 dark:shadow-black/30 p-6";
     const sectionHeadingClass = "text-2xl font-semibold tracking-tight mb-3 flex items-center gap-2";
@@ -223,14 +225,23 @@ export default function CardDetailPage({ card }: CardDetailPageProps) {
                         <section className={panelClass}>
                             <h2 className="text-3xl font-semibold mb-4 text-slate-900 dark:text-white">Related Cards</h2>
                             <div className="flex flex-wrap gap-3">
-                                {seoData.related_cards.map((relatedCard, index) => (
-                                    <span
-                                        key={index}
-                                        className="bg-white/80 dark:bg-slate-900/60 border border-purple-100/40 dark:border-purple-800/40 text-purple-800 dark:text-purple-100 px-4 py-2 rounded-lg text-sm font-medium"
-                                    >
-                                        {relatedCard}
-                                    </span>
-                                ))}
+                                {seoData.related_cards.map((relatedCard, index) => {
+                                    // Generate a simple slug from the card name
+                                    const slug = relatedCard
+                                        .toLowerCase()
+                                        .replace(/[^a-z0-9]+/g, "-")
+                                        .replace(/(^-|-$)/g, "");
+
+                                    return (
+                                        <Link
+                                            key={index}
+                                            href={`/library/${slug}`}
+                                            className="bg-white/80 dark:bg-slate-900/60 border border-purple-100/40 dark:border-purple-800/40 text-purple-800 dark:text-purple-100 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-100 dark:hover:bg-purple-900/40 hover:scale-105 transition-all duration-200"
+                                        >
+                                            {relatedCard}
+                                        </Link>
+                                    );
+                                })}
                             </div>
                         </section>
                     </div>

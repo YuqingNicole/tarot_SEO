@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
 import TopBar from "@/components/TopBar";
+import Footer from "@/components/Footer";
 
 const quicksand = Quicksand({
     weight: ["300", "400", "500", "600", "700"],
@@ -40,14 +41,7 @@ export default function RootLayout({
                     {children}
                 </main>
 
-                <footer className="bg-gray-900 text-gray-300 py-8 mt-16">
-                    <div className="container mx-auto px-4 text-center">
-                        <p>&copy; {new Date().getFullYear()} Tarot Card Meanings. All rights reserved.</p>
-                        <p className="text-sm mt-2 text-gray-400">
-                            Explore the wisdom of the tarot through detailed card meanings and interpretations.
-                        </p>
-                    </div>
-                </footer>
+                <Footer />
             </body>
         </html>
     );
