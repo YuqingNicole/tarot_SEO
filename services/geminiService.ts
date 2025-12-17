@@ -254,7 +254,7 @@ export async function getCardSEOData(card: TarotCard): Promise<SEOCardData> {
 
     try {
         const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-pro",
+            model: "gemini-2.5-flash",
             generationConfig: {
                 responseMimeType: "application/json",
                 responseSchema: seoDataSchema as any,

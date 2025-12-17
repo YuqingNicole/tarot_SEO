@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, Library, Home } from "lucide-react";
 
 export default function TopBar() {
     const pathname = usePathname();
@@ -13,7 +12,7 @@ export default function TopBar() {
     ];
 
     return (
-        <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
@@ -34,23 +33,24 @@ export default function TopBar() {
                                     key={item.href}
                                     href={item.href}
                                     className={`
-                    flex items-center space-x-2 px-4 py-2 rounded-lg
-                    transition-all duration-200
-                    ${isActive
-                                            ? "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 font-medium"
-                                            : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                        flex items-center space-x-2 px-4 py-2 rounded-lg
+                                        transition-all duration-200
+                                        ${isActive
+                                            ? "bg-purple-100 text-purple-700 font-medium"
+                                            : "text-gray-600 hover:bg-gray-100"
                                         }
-                  `}
-                                >                                    <span>{item.label}</span>
+                                    `}
+                                >
+                                    <span>{item.label}</span>
                                 </Link>
                             );
                         })}
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden">
+                    <div className="md:hidden flex items-center space-x-2">
                         <button
-                            className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            className="p-2 rounded-lg text-gray-600 hover:bg-gray-100"
                             aria-label="Menu"
                         >
                             <svg
@@ -81,12 +81,12 @@ export default function TopBar() {
                                     key={item.href}
                                     href={item.href}
                                     className={`
-                    flex items-center space-x-2 px-4 py-2 rounded-lg
-                    ${isActive
-                                            ? "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 font-medium"
-                                            : "text-gray-600 dark:text-gray-300"
+                                        flex items-center space-x-2 px-4 py-2 rounded-lg
+                                        ${isActive
+                                            ? "bg-purple-100 text-purple-700 font-medium"
+                                            : "text-gray-600"
                                         }
-                  `}
+                                    `}
                                 >
                                     <span>{item.label}</span>
                                 </Link>
@@ -98,3 +98,4 @@ export default function TopBar() {
         </nav>
     );
 }
+
