@@ -82,9 +82,13 @@ export default function Card({
             {/* Card Front */}
             <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-lg overflow-hidden shadow-xl bg-white dark:bg-gray-800">
                 <div className="w-full h-full p-4 flex flex-col">
-                    {/* Card Image Placeholder */}
-                    <div className="flex-1 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-lg flex items-center justify-center mb-3">
-                        <div className="text-6xl">🎴</div>
+                    {/* Card Image */}
+                    <div className="flex-1 relative rounded-lg overflow-hidden mb-3">
+                        <img
+                            src={card.image_path}
+                            alt={card.name}
+                            className="w-full h-full object-cover"
+                        />
                     </div>
 
                     {/* Card Name - Always Visible */}

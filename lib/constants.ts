@@ -62,19 +62,25 @@ function createSlug(name: string): string {
 
 // Generate Major Arcana cards
 function generateMajorArcana(): TarotCard[] {
-    return MAJOR_ARCANA_NAMES.map((name, index) => ({
-        id: index,
-        name,
-        slug: createSlug(name),
-        arcana: "major" as const,
-        number: index,
-        keywords: [],
-        description: `${name} represents a major life theme or spiritual lesson.`,
-        upright_meaning: `The upright ${name} signifies...`,
-        reversed_meaning: `The reversed ${name} indicates...`,
-        symbolism: `${name} is rich with symbolic meaning...`,
-        image_path: `/images/cards/${String(index).padStart(2, "0")}-${createSlug(name)}.jpg`,
-    }));
+    return MAJOR_ARCANA_NAMES.map((name, index) => {
+        // Format name for filename: "The Fool" -> "Fool", "Wheel of Fortune" -> "Wheel_of_Fortune"
+        const namePart = name.replace("The ", "").replace(/\s+/g, "_");
+        const fileName = `RWS_Tarot_${String(index).padStart(2, "0")}_${namePart}.jpg`;
+
+        return {
+            id: index,
+            name,
+            slug: createSlug(name),
+            arcana: "major" as const,
+            number: index,
+            keywords: [],
+            description: `${name} represents a major life theme or spiritual lesson.`,
+            upright_meaning: `The upright ${name} signifies...`,
+            reversed_meaning: `The reversed ${name} indicates...`,
+            symbolism: `${name} is rich with symbolic meaning...`,
+            image_path: `/images/tarot%20cards/${fileName}`,
+        };
+    });
 }
 
 // Generate Minor Arcana cards
@@ -83,10 +89,23 @@ function generateMinorArcana(): TarotCard[] {
     let id = 22; // Start after Major Arcana
 
     SUITS.forEach((suit) => {
-        RANKS.forEach((rank) => {
+        RANKS.forEach((rank, rankIndex) => {
             const rankName = rank === Rank.ACE ? "Ace" : rank.charAt(0).toUpperCase() + rank.slice(1);
             const suitName = suit.charAt(0).toUpperCase() + suit.slice(1);
             const name = `${rankName} of ${suitName}`;
+
+            // Map standard suits to filename suits
+            let fileSuit = "";
+            switch (suit) {
+                case "pentacles": fileSuit = "Pents"; break;
+                default: fileSuit = suit.charAt(0).toUpperCase() + suit.slice(1); break; // Caps first letter
+            }
+
+            // Map rank to 01-14
+            // Rank enum order in RANKS array: ACE (0) -> KING (13)
+            // We want 01 -> 14
+            const fileRank = String(rankIndex + 1).padStart(2, "0");
+            const fileName = `${fileSuit}${fileRank}.jpg`;
 
             cards.push({
                 id: id++,
@@ -100,7 +119,7 @@ function generateMinorArcana(): TarotCard[] {
                 upright_meaning: `Upright, the ${name} suggests...`,
                 reversed_meaning: `Reversed, the ${name} warns...`,
                 symbolism: `The ${name} features symbolic imagery...`,
-                image_path: `/images/cards/${createSlug(name)}.jpg`,
+                image_path: `/images/tarot%20cards/${fileName}`,
             });
         });
     });

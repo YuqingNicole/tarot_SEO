@@ -92,7 +92,7 @@ export default function TarotLibrary() {
                 {filteredCards.map((card) => (
                     <Link
                         key={card.id}
-                        href={`/library/${card.slug}`}
+                        href={`/cards/${card.slug}`}
                         className="block aspect-[2/3] hover:scale-105 transition-transform"
                     >
                         <Card card={card} interactive={false} />

@@ -8,7 +8,7 @@ export default function TopBar() {
 
     const navItems = [
         { href: "/", label: "Home" },
-        { href: "/library", label: "Library" },
+        { href: "/cards", label: "Cards" },
     ];
 
     return (
@@ -18,7 +18,7 @@ export default function TopBar() {
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2 group">
                         <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                            Tarot
+                            Tarotarot
                         </span>
                     </Link>
 

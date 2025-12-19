@@ -235,7 +235,7 @@ export default function CardDetailPage({ card, initialSeoData = null }: CardDeta
                                     return (
                                         <Link
                                             key={index}
-                                            href={`/library/${slug}`}
+                                            href={`/cards/${slug}`}
                                             className="bg-white/80 dark:bg-slate-900/60 border border-purple-100/40 dark:border-purple-800/40 text-purple-800 dark:text-purple-100 px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-100 dark:hover:bg-purple-900/40 hover:scale-105 transition-all duration-200"
                                         >
                                             {relatedCard}
