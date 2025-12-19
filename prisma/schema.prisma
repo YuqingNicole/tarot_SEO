@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Card {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  name      String
+  arcana    String   // "major" | "minor"
+  suit      String?  // "wands", "cups", "swords", "pentacles"
+  rank      String?  // "ace", "two"... "king"
+  imagePath String
+  
+  seoData   CardSEO?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CardSEO {
+  id                Int      @id @default(autoincrement())
+  card              Card     @relation(fields: [cardId], references: [id])
+  cardId            Int      @unique
+  
+  symbolismDetailed String   @db.Text
+  loveReading       String   @db.Text
+  careerReading     String   @db.Text
+  healthReading     String   @db.Text
+  spiritualReading  String   @db.Text
+  
+  commonQuestions   Json     // Stores array of { question: string, answer: string }
+  relatedCards      String[]
+  
+  keywords          String[]
+}

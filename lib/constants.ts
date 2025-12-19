@@ -60,6 +60,13 @@ function createSlug(name: string): string {
     return name.toLowerCase().replace(/\s+/g, "-");
 }
 
+// Helper to get image path with optional CDN
+function getImagePath(fileName: string): string {
+    const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL;
+    const path = `/images/tarot%20cards/${fileName}`;
+    return cdnUrl ? `${cdnUrl}${path}` : path;
+}
+
 // Generate Major Arcana cards
 function generateMajorArcana(): TarotCard[] {
     return MAJOR_ARCANA_NAMES.map((name, index) => {
@@ -78,7 +85,7 @@ function generateMajorArcana(): TarotCard[] {
             upright_meaning: `The upright ${name} signifies...`,
             reversed_meaning: `The reversed ${name} indicates...`,
             symbolism: `${name} is rich with symbolic meaning...`,
-            image_path: `/images/tarot%20cards/${fileName}`,
+            image_path: getImagePath(fileName),
         };
     });
 }

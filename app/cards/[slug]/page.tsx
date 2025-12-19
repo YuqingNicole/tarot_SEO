@@ -64,9 +64,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         };
     }
 
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://your-domain.com";
+    const imageUrl = `${baseUrl}${card.image_path}`;
+
     return {
-        title: `${card.name} Tarot Card Meaning and Symbolism`,
+        title: `${card.name} Tarot Card Meaning | Upright & Reversed`,
         description: seoData.symbolism_detailed.slice(0, 160) + "...",
+        alternates: {
+            canonical: `${baseUrl}/cards/${slug}`,
+        },
+        openGraph: {
+            title: `${card.name} Tarot Card Meaning`,
+            description: seoData.symbolism_detailed.slice(0, 160) + "...",
+            url: `${baseUrl}/cards/${slug}`,
+            siteName: "Tarotarot Card",
+            images: [
+                {
+                    url: imageUrl, // Uses the card image we mapped earlier
+                    width: 800,
+                    height: 1200,
+                    alt: `${card.name} Tarot Card`,
+                },
+            ],
+            locale: "en_US",
+            type: "article",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${card.name} Tarot Card Meaning`,
+            description: seoData.symbolism_detailed.slice(0, 160) + "...",
+            images: [imageUrl],
+        },
     };
 }
 
