@@ -9,6 +9,11 @@ export default function TopBar() {
     const navItems = [
         { href: "/", label: "Home" },
         { href: "/cards", label: "Cards" },
+        { href: "/how-to-read", label: "How to Read" },
+        { href: "/question", label: "Question" },
+        { href: "/pricing", label: "Pricing" },
+        { href: "/login", label: "Login" },
+        { href: "/register", label: "Register" },
     ];
 
     return (
@@ -27,6 +32,25 @@ export default function TopBar() {
                         {navItems.map((item) => {
                             const isActive = pathname === item.href ||
                                 (item.href !== "/" && pathname.startsWith(item.href));
+
+                            const isRegister = item.label === "Register";
+
+                            if (isRegister) {
+                                return (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="
+                                            flex items-center space-x-2 px-5 py-2 rounded-full
+                                            bg-gradient-to-r from-purple-600 to-pink-600
+                                            text-white font-semibold shadow-md
+                                            hover:shadow-lg hover:scale-105 transition-all duration-200
+                                        "
+                                    >
+                                        <span>{item.label}</span>
+                                    </Link>
+                                );
+                            }
 
                             return (
                                 <Link
@@ -75,6 +99,24 @@ export default function TopBar() {
                     <div className="flex flex-col space-y-2">
                         {navItems.map((item) => {
                             const isActive = pathname === item.href;
+
+                            const isRegister = item.label === "Register";
+
+                            if (isRegister) {
+                                return (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="
+                                            flex items-center justify-center space-x-2 px-4 py-2 rounded-lg
+                                            bg-gradient-to-r from-purple-600 to-pink-600
+                                            text-white font-semibold
+                                        "
+                                    >
+                                        <span>{item.label}</span>
+                                    </Link>
+                                );
+                            }
 
                             return (
                                 <Link

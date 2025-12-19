@@ -164,6 +164,27 @@ export default async function CardPage({ params }: PageProps) {
                             </div>
                         </div>
 
+                        {/* CTA Section */}
+                        <div className="my-16 text-center">
+                            <div className="bg-white/80 dark:bg-slate-900/75 backdrop-blur-sm shadow-lg shadow-purple-200/40 dark:shadow-black/30 p-8 rounded-2xl border border-purple-100 dark:border-purple-800 max-w-2xl mx-auto">
+                                <h3 className="text-2xl font-semibold mb-3 text-slate-900 dark:text-white">
+                                    Explore More Tarot Wisdom
+                                </h3>
+                                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                    Discover the complete tarot deck and learn about all 78 cards, their meanings, and how they can guide your journey.
+                                </p>
+                                <Link
+                                    href="/"
+                                    className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                                >
+                                    <span>try daily reading</span>
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </Link>
+                            </div>
+                        </div>
+
                         {/* Common Questions */}
                         <section className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
                             <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 flex items-center gap-2">

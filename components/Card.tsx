@@ -23,7 +23,7 @@ export default function Card({
     interactive = false,
     showReading = false,
 }: CardProps) {
-    const [isFlipped, setIsFlipped] = useState(false);
+    const [isFlipped, setIsFlipped] = useState(true);
     const [reading, setReading] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 

@@ -29,7 +29,7 @@ export default function Footer() {
             ],
         },
         {
-            title: "Company",
+            title: "About",
             links: [
                 { label: "About", href: "/about" },
             ],
@@ -38,16 +38,14 @@ export default function Footer() {
             title: "Legal",
             links: [
                 { label: "Terms of Service", href: "/terms" },
-                { label: "Privacy Policy", href: "/privacy" },
-                { label: "Credits Policy", href: "/credits" },
+                { label: "Privacy Policy", href: "/privacy" }
             ],
         },
         {
-            title: "Connect",
+            title: "Contacts",
             links: [
                 { label: "Twitter", href: "https://twitter.com", external: true },
-                { label: "Xiaohongshu", href: "https://xiaohongshu.com", external: true },
-                { label: "Discord", href: "https://discord.com", external: true },
+                { label: "Instagram", href: "https://discord.com", external: true },
             ],
         },
     ];
@@ -82,7 +80,7 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-purple-100/50 dark:border-purple-900/30 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-500">
-                    <p>&copy; {new Date().getFullYear()} Tarot Card Meanings. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Tarotarot Card. All rights reserved.</p>
                 </div>
             </div>
         </footer>
