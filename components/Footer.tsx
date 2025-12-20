@@ -31,7 +31,8 @@ export default function Footer() {
         {
             title: "About",
             links: [
-                { label: "About", href: "/about" },
+                { label: "Meanings", href: "/about" },
+                { label: "Questions", href: "/about" },
             ],
         },
         {

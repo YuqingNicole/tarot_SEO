@@ -78,6 +78,34 @@ export default function DirectoryPage() {
                     </div>
                 </div>
 
+                {/* Popular Questions Section */}
+                <section className="mt-12 bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-sm border border-gray-200 dark:border-gray-800">
+                    <h2 className="text-2xl font-bold mb-6 text-pink-700 dark:text-pink-400 border-b border-gray-100 dark:border-gray-800 pb-2">
+                        Popular Tarot Questions
+                    </h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {[
+                            { q: "What does The Moon mean in love?", slug: "what-does-the-moon-tarot-card-meaning-in-love" },
+                            { q: "What does The Tower mean?", slug: "what-does-the-tower-tarot-card-mean" },
+                            { q: "Is he the one?", slug: "is-he-the-one" },
+                            { q: "Will my ex come back?", slug: "will-my-ex-come-back" },
+                            { q: "What are his true feelings?", slug: "what-are-his-true-feelings" },
+                            { q: "Career outlook for next month", slug: "career-outlook-next-month" },
+                        ].map((item) => (
+                            <Link
+                                key={item.slug}
+                                href={`/questions/${item.slug}`}
+                                className="flex items-center group p-3 rounded-lg hover:bg-pink-50 dark:hover:bg-pink-900/20 transition-colors border border-transparent hover:border-pink-100 dark:hover:border-pink-900"
+                            >
+                                <span className="text-pink-400 mr-3">?</span>
+                                <span className="text-gray-700 dark:text-gray-300 font-medium group-hover:text-pink-700 dark:group-hover:text-pink-300">
+                                    {item.q}
+                                </span>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+
                 <div className="mt-16 text-center">
                     <Link href="/cards" className="text-purple-600 hover:text-purple-800 font-medium">
                         View Visual Library &rarr;

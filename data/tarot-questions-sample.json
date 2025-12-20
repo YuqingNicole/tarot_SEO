@@ -1,0 +1,32 @@
+[
+  {
+    "card": "The Fool",
+    "category": "love",
+    "question": "How can I invite more spontaneity and trust into my romantic life?",
+    "interpretation": "The Fool urges you to leap toward love with optimism. Release rigid expectations and let curiosity guide your next move."
+  },
+  {
+    "card": "The High Priestess",
+    "category": "self-reflection",
+    "question": "What hidden feelings or intuitive nudges am I ignoring right now?",
+    "interpretation": "The High Priestess asks you to pause and listen. Journal your dreams, meditate, or pull clarifying cards to uncover the deeper message."
+  },
+  {
+    "card": "The Emperor",
+    "category": "career",
+    "question": "Where do I need stronger boundaries or structure at work?",
+    "interpretation": "The Emperor points to leadership through order. Define clear priorities, enforce timelines, and claim authority over your schedule."
+  },
+  {
+    "card": "The Star",
+    "category": "healing",
+    "question": "What hope or vision is ready to be rekindled after a difficult chapter?",
+    "interpretation": "The Star restores faith in your path. Create rituals of renewal—ritual baths, affirmations, or creative play—to anchor that light."
+  },
+  {
+    "card": "Ten of Pentacles",
+    "category": "family",
+    "question": "How can I nurture long-term stability and legacy for my loved ones?",
+    "interpretation": "This card highlights shared resources and tradition. Review budgets, plan gatherings, or document family stories to weave continuity."
+  }
+]
