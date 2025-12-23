@@ -29,11 +29,11 @@ export default function Footer() {
             ],
         },
         {
-            title: "About",
+            title: "Directory",
             links: [
-                { label: "Meanings", href: "/about" },
-                { label: "Questions", href: "/about" },
-                { label: "How to Read", href: "/how-to-read" },
+                { label: "Card Library", href: "/cards" },
+                { label: "Meaning", href: "/meaning" },
+                { label: "Questions", href: "/questions" }
             ],
         },
         {

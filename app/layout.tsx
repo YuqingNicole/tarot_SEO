@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
+import React from "react";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
 
