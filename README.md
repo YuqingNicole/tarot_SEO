@@ -140,3 +140,11 @@ MIT
 - Tarot card meanings based on traditional interpretations
 - AI powered by Google Gemini
 - Built with Next.js and React
+
+## Current Routing & Architecture Snapshot
+
+- **Root layout** (`app/layout.tsx`): wraps every page with shared `TopBar`, `Footer`, Quicksand font, and global metadata, so all routes inherit the same SEO defaults.
+- **Data layer** (`lib/constants.ts` + `data/card-seo-data.json`): generates the 78-card `DECK`, helpers (`filterByArcana`, `filterBySuit`, `getCardBySlug`), and card-specific SEO copy consumed by dynamic pages.
+- **Components** (`components/`): `TarotLibrary` handles interactive browsing/search/filter, while `Card`, `TopBar`, and `Footer` provide reusable presentation across routes.
+- **Key routes** (`app/`): `/` (marketing home), `/cards` (library view), `/cards/[slug]` (SSG card detail powered by JSON SEO data), `/directory` (structured index + question links), `/meaning/[slug]` & `/questions/[slug]` (mocked Q&A templates), plus `sitemap.xml` for SEO; `/api` reserved via README.
+- **Next steps**: add the missing `/library` target or redirect CTA to `/cards`, connect `/meaning`/`/questions` to real data, and implement the planned `/api` endpoints (auth, draws, readings) referenced in `app/api/README.md`.
