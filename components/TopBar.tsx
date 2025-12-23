@@ -7,10 +7,7 @@ export default function TopBar() {
     const pathname = usePathname();
 
     const navItems = [
-        { href: "/", label: "Home" },
         { href: "/cards", label: "Cards" },
-        { href: "/how-to-read", label: "How to Read" },
-        { href: "/question", label: "Question" },
         { href: "/pricing", label: "Pricing" },
         { href: "/login", label: "Login" },
         { href: "/register", label: "Register" },

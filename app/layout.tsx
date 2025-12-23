@@ -31,8 +31,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${quicksand.className} antialiased`}>
+        <html lang="en" suppressHydrationWarning>
+            <body className={`${quicksand.className} antialiased`} suppressHydrationWarning>
                 <div className="stars"></div>
 
                 <TopBar />

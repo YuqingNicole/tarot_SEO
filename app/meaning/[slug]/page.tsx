@@ -13,7 +13,6 @@ interface QuestionData {
     tags: string[];
     relatedCards: Array<{
         name: string;
-        imagePlaceholder: string; // Using emoji for now
         meaning: string;
     }>;
     relatedQuestions: Array<{
@@ -24,14 +23,20 @@ interface QuestionData {
 
 // Emulate a database fetch
 async function getQuestionData(slug: string): Promise<QuestionData> {
-    // In a real app, you would fetch from DB or CMS based on slug
-    // For demonstration, we return static data for any slug
+    const samples = (await import("@/data/meaning-seo-generated.json")).default;
+    const match = samples.find((s: any) => s.slug === slug);
+
+    if (match) {
+        return match as QuestionData;
+    }
+
+    // Fallback for demonstration for any other slug
     const decodedSlug = decodeURIComponent(slug).replace(/-/g, " ");
 
     return {
-        id: "1",
+        id: "fallback",
         slug: slug,
-        question: decodedSlug === "slug" ? "What does the Fool card mean for my love life?" : decodedSlug, // Default fallback or formatted slug
+        question: decodedSlug === "slug" ? "What does the Fool card mean for my love life?" : decodedSlug,
         shortAnswer: "The Fool in a love reading suggests a new beginning, spontaneity, and a leap of faith. It indicates an exciting, carefree romance or the start of a new chapter in an existing relationship, urging you to trust the universe and embrace the unknown.",
         detailedAnswer: `
       <p>When the <strong>The Fool</strong> appears in a love reading, it is a powerful omen of new beginnings. It signifies a time of optimism, innocence, and freedom.</p>
@@ -49,12 +54,10 @@ async function getQuestionData(slug: string): Promise<QuestionData> {
         relatedCards: [
             {
                 name: "The Magician",
-                imagePlaceholder: "🎩",
                 meaning: "Manifesting your desires into reality."
             },
             {
                 name: "The Lovers",
-                imagePlaceholder: "💕",
                 meaning: "Deep connection and important choices."
             }
         ],
@@ -84,8 +87,25 @@ export default async function QuestionPage({ params }: { params: Promise<{ slug:
     return (
         <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50 dark:from-gray-950 dark:to-purple-950">
 
+            {/* --- Sticky SubTopBar CTA --- */}
+            <div className="sticky top-16 z-40 w-full bg-white/95 dark:bg-gray-950/95 backdrop-blur-md border-b border-purple-100 dark:border-purple-900/50 py-3 shadow-sm overflow-hidden">
+                <div className="container mx-auto px-4 flex items-center justify-between gap-6">
+                    <div className="flex items-center gap-4 overflow-hidden">
+                        <div className="overflow-hidden">
+                            <h3 className="font-bold text-purple-900 dark:text-purple-100 whitespace-nowrap">Want deeper insight?</h3>
+                            <p className="text-xs text-gray-600 dark:text-gray-400 hidden md:block truncate">
+                                The cards tell a story, but your intuition holds the key. Connect with a professional reader today.
+                            </p>
+                        </div>
+                    </div>
+                    <button className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm hover:shadow-lg hover:scale-105 transition-all whitespace-nowrap shadow-md">
+                        Start Free Reading
+                    </button>
+                </div>
+            </div>
+
             {/* --- Breadcrumb & Navigation --- */}
-            <nav className="container mx-auto px-4 py-6">
+            <nav className="container mx-auto px-4 py-4">
                 <Link
                     href="/questions"
                     className="inline-flex items-center text-sm text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors"
@@ -125,8 +145,7 @@ export default async function QuestionPage({ params }: { params: Promise<{ slug:
                                 <Star className="w-24 h-24 text-purple-500" />
                             </div>
                             <h2 className="text-xl font-semibold mb-4 text-purple-900 dark:text-purple-100 flex items-center">
-                                <Compass className="w-5 h-5 mr-2 text-purple-500" />
-                                The Short Answer
+                                TL;DR
                             </h2>
                             <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-200 font-medium">
                                 {data.shortAnswer}
@@ -137,20 +156,25 @@ export default async function QuestionPage({ params }: { params: Promise<{ slug:
                         <article className="prose prose-lg prose-purple dark:prose-invert max-w-none bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
                             <div dangerouslySetInnerHTML={{ __html: data.detailedAnswer }} />
 
-                            {/* Related Cards Context */}
+                            {/* Related Cards Context - Horizontal Scroll */}
                             <div className="not-prose mt-10">
-                                <h3 className="text-xl font-bold mb-6 flex items-center text-gray-900 dark:text-white">
-                                    <span className="text-2xl mr-2">🃏</span> Related Cards to Watch For
-                                </h3>
-                                <div className="grid sm:grid-cols-2 gap-4">
+                                <div className="flex items-center justify-between mb-6">
+                                    <h3 className="text-xl font-bold flex items-center text-gray-900 dark:text-white">
+                                        <span className="text-2xl mr-2">🃏</span> Related Cards to Watch For
+                                    </h3>
+                                    <div className="text-xs text-purple-600 dark:text-purple-400 font-medium animate-pulse">
+                                        Swipe for more →
+                                    </div>
+                                </div>
+                                <div className="flex gap-4 overflow-x-auto pb-6 scrollbar-hide snap-x -mx-2 px-2">
                                     {data.relatedCards.map((card, idx) => (
-                                        <div key={idx} className="flex items-start p-4 rounded-xl bg-purple-50 dark:bg-gray-800/50 border border-purple-100 dark:border-purple-900/50 hover:shadow-md transition-shadow">
-                                            <div className="text-3xl mr-4 bg-white dark:bg-gray-700 rounded-lg w-12 h-12 flex items-center justify-center shadow-sm">
-                                                {card.imagePlaceholder}
-                                            </div>
-                                            <div>
-                                                <h4 className="font-bold text-gray-900 dark:text-gray-100">{card.name}</h4>
-                                                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{card.meaning}</p>
+                                        <div
+                                            key={idx}
+                                            className="flex-none w-[280px] sm:w-[320px] snap-start p-5 rounded-2xl bg-gradient-to-br from-purple-50 to-white dark:from-gray-800/50 dark:to-gray-900/50 border border-purple-100 dark:border-purple-900/50 shadow-sm hover:shadow-md transition-all duration-300"
+                                        >
+                                            <div className="overflow-hidden">
+                                                <h4 className="font-bold text-gray-900 dark:text-gray-100 truncate">{card.name}</h4>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-3 leading-relaxed">{card.meaning}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -172,17 +196,6 @@ export default async function QuestionPage({ params }: { params: Promise<{ slug:
 
                     {/* --- Sidebar (Right) --- */}
                     <aside className="lg:col-span-4 space-y-8">
-
-                        {/* Context/Sticky Box or Ad Space */}
-                        <div className="bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-2xl border border-purple-200 dark:border-purple-800 sticky top-24">
-                            <h3 className="font-bold text-lg mb-2 text-purple-900 dark:text-purple-100">Want deeper insight?</h3>
-                            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-                                The cards tell a story, but your intuition holds the key. Connect with a professional reader today.
-                            </p>
-                            <button className="w-full py-2 rounded-lg bg-white dark:bg-gray-800 text-purple-600 dark:text-purple-300 font-semibold text-sm hover:bg-purple-50 transition-colors shadow-sm">
-                                Start Free Reading
-                            </button>
-                        </div>
 
                         {/* Related Questions Grid */}
                         <div>

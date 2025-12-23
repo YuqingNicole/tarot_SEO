@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Share2, Sparkles, MessageCircle, Star, Compass, AlertCircle, HelpCircle, ArrowRight } from "lucide-react";
+import { ArrowLeft, HelpCircle, Sparkles, Star, MessageCircle, Share2, Compass, ChevronDown } from "lucide-react";
 
-// --- Data Interfaces based on meaning-seo-samples.json ---
-
+// --- Data Interfaces ---
 interface SEOData {
     title: string;
     description: string;
@@ -28,9 +27,6 @@ interface QuestionData {
 }
 
 // --- Mock Data ---
-// In a real implementation, this would fetch from a database or the JSON file directly.
-// For now, we replicate the "Moon" example from the provided JSON.
-
 const MOON_SAMPLE: QuestionData = {
     keyword: "What Does The Moon Tarot Card Mean in Love?",
     seo: {
@@ -86,15 +82,9 @@ const TOWER_SAMPLE: QuestionData = {
 };
 
 async function getQuestionData(slug: string): Promise<QuestionData> {
-    // Simple mock routing based on slug keywords
-    if (slug.includes("tower")) {
-        return TOWER_SAMPLE;
-    }
-    // Default to Moon sample for any other slug for demonstration
+    if (slug.includes("tower")) return TOWER_SAMPLE;
     return MOON_SAMPLE;
 }
-
-// --- Page Components ---
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
@@ -110,80 +100,85 @@ export default async function QuestionPage({ params }: { params: Promise<{ slug:
     const data = await getQuestionData(slug);
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20">
+        <div className="min-h-screen bg-[#fafafa] dark:bg-gray-950 text-slate-900 dark:text-slate-100 selection:bg-purple-100">
 
-            {/* --- Breadcrumb & Navigation --- */}
-            <div className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-800 sticky top-0 z-10 opacity-95 backdrop-blur-sm">
-                <nav className="container mx-auto px-4 py-4">
-                    <Link
-                        href="/directory"
-                        className="inline-flex items-center text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors"
-                    >
-                        <ArrowLeft className="w-4 h-4 mr-2" />
-                        Back to Directory
-                    </Link>
-                </nav>
+            {/* --- Sticky SubTopBar (Conversion Focus) --- */}
+            <div className="sticky top-16 z-30 w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-purple-100/50 dark:border-purple-900/30 py-3 md:py-4 shadow-sm">
+                <div className="container mx-auto px-5 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 overflow-hidden">
+                        <div className="hidden sm:flex w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-900/20 items-center justify-center flex-shrink-0">
+                            <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                        </div>
+                        <div className="overflow-hidden">
+                            <h3 className="text-xs md:text-sm font-bold text-slate-900 dark:text-white whitespace-nowrap">Seeking deeper answers?</h3>
+                            <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 hidden xs:block truncate font-light">
+                                Get a personal reading tailored to your unique energy.
+                            </p>
+                        </div>
+                    </div>
+                    <button className="flex-shrink-0 px-4 md:px-6 py-2 md:py-2.5 rounded-full bg-purple-600 text-white font-bold text-[10px] md:text-xs uppercase tracking-widest hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-200 dark:hover:shadow-none transition-all active:scale-95">
+                        Personal Reading
+                    </button>
+                </div>
             </div>
 
-            <main className="container mx-auto px-4 py-8 max-w-4xl">
+            <main className="container mx-auto px-5 py-10 md:py-16 lg:py-20 max-w-6xl">
+                {/* --- Responsive Header --- */}
+                <div className="flex flex-col items-center text-center mb-12 md:mb-20">
+                    <Link
+                        href="/directory"
+                        className="group inline-flex items-center text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 hover:text-purple-600 transition-colors mb-6 md:mb-8"
+                    >
+                        <ArrowLeft className="w-3 h-3 mr-2 group-hover:-translate-x-1 transition-transform" />
+                        Back to Directory
+                    </Link>
 
-                {/* --- Header Section --- */}
-                <header className="mb-10 text-center">
-                    <div className="inline-block px-3 py-1 mb-4 rounded-full text-xs font-semibold bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 uppercase tracking-wide">
-                        Tarot Wisdom
-                    </div>
-                    <h1 className="text-3xl md:text-5xl font-bold leading-tight text-slate-900 dark:text-white mb-6">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8 leading-[1.1] max-w-4xl">
                         {data.keyword}
                     </h1>
-                    <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+
+                    <div className="h-1 w-12 md:w-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-6 md:mb-8"></div>
+
+                    <p className="text-lg md:text-xl lg:text-2xl text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-2xl mx-auto px-2">
                         {data.seo.description}
                     </p>
-                </header>
+                </div>
 
-                {/* --- Product Bridge / CTA --- */}
-                <section className="mb-16 max-w-3xl mx-auto">
-                    <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-3xl p-8 md:p-12 text-center border border-purple-200 dark:border-purple-800/50">
-                        <Star className="w-12 h-12 text-purple-600 dark:text-purple-400 mx-auto mb-6" />
+                <div className="max-w-4xl mx-auto">
+                    {/* --- Content Column --- */}
+                    <div className="space-y-8 md:space-y-12 lg:space-y-16">
+                        {data.faqs.map((faq, index) => (
+                            <details key={index} className="group pb-8 md:pb-12 border-b border-slate-100 dark:border-slate-900 last:border-0" open={index === 0}>
+                                <summary className="flex items-center justify-between cursor-pointer list-none list-inside outline-none">
+                                    <div className="relative">
+                                        <div className="absolute -left-4 md:-left-6 top-0 md:top-1 text-purple-200 dark:text-purple-900/40 font-bold text-2xl md:text-3xl select-none opacity-50 group-hover:opacity-100 transition-opacity group-open:text-purple-500/30">Q</div>
+                                        <h2 className="text-xl md:text-2xl font-bold pr-8 text-slate-900 dark:text-white leading-snug group-hover:text-purple-600 transition-colors">
+                                            {faq.question}
+                                        </h2>
+                                    </div>
+                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-purple-50 dark:group-hover:bg-purple-900/20 transition-colors">
+                                        <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform duration-300" />
+                                    </div>
+                                </summary>
+                                <div className="mt-6 md:mt-8 text-base md:text-lg leading-relaxed text-slate-600 dark:text-slate-400 font-light pl-1 md:pl-2 border-l-2 border-purple-100 dark:border-purple-900/30 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-500">
+                                    {faq.answer}
+                                </div>
+                            </details>
+                        ))}
+                    </div>
 
-                        <h2 className="text-xl md:text-2xl font-serif font-medium text-slate-800 dark:text-white mb-4 leading-relaxed">
-                            "{data.product_bridge.upsell_hook}"
-                        </h2>
-
-                        <div className="inline-block px-4 py-1.5 rounded-full bg-white/60 dark:bg-black/20 text-sm font-semibold text-purple-700 dark:text-purple-300 mb-8 border border-purple-100 dark:border-purple-800">
-                            Recommended: {data.product_bridge.tool_recommendation}
-                        </div>
-
-                        <div>
-                            <button className="inline-flex items-center px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all group">
-                                {data.product_bridge.button_label}
-                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    {/* --- Action Buttons (Responsive) --- */}
+                    <div className="mt-16 md:mt-20 pt-8 md:pt-10 border-t border-slate-100 dark:border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div className="flex gap-6 sm:gap-8 text-slate-400">
+                            <button className="hover:text-purple-600 transition-colors flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
+                                <Share2 className="w-4 h-4" /> Share Answer
+                            </button>
+                            <button className="hover:text-purple-600 transition-colors flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
+                                <Compass className="w-4 h-4" /> Discover More
                             </button>
                         </div>
                     </div>
-                </section>
-
-                {/* --- FAQ Section --- */}
-                <section className="max-w-3xl mx-auto">
-                    <h2 className="text-2xl font-bold mb-8 text-center text-slate-900 dark:text-white flex items-center justify-center">
-                        <HelpCircle className="w-6 h-6 mr-3 text-purple-500" />
-                        Common Questions & Guidance
-                    </h2>
-                    <div className="space-y-6">
-                        {data.faqs.map((faq, index) => (
-                            <article key={index} className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 transition-all hover:shadow-md">
-                                <h3 className="text-lg font-bold mb-3 text-slate-800 dark:text-purple-100">
-                                    {faq.question}
-                                </h3>
-                                <div className="prose prose-slate dark:prose-invert max-w-none">
-                                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                                        {faq.answer}
-                                    </p>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                </section>
-
+                </div>
             </main>
         </div>
     );

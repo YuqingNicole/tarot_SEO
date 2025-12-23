@@ -33,6 +33,7 @@ export default function Footer() {
             links: [
                 { label: "Meanings", href: "/about" },
                 { label: "Questions", href: "/about" },
+                { label: "How to Read", href: "/how-to-read" },
             ],
         },
         {
@@ -46,7 +47,7 @@ export default function Footer() {
             title: "Contacts",
             links: [
                 { label: "Twitter", href: "https://twitter.com", external: true },
-                { label: "Instagram", href: "https://discord.com", external: true },
+                { label: "Instagram", href: "https://Instagram.com", external: true },
             ],
         },
     ];
